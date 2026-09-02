@@ -186,14 +186,6 @@ export function getOSApi(): OSApi | undefined {
   return currentOsApi ?? undefined;
 }
 
-let babelReady = false;
-
-async function ensureBabel(): Promise<void> {
-  if (babelReady) return;
-  await import('@babel/standalone');
-  babelReady = true;
-}
-
 const transpileCache = new Map<string, string>();
 
 async function transpileComponent(code: string): Promise<string> {
@@ -206,6 +198,7 @@ async function transpileComponent(code: string): Promise<string> {
     presets: [
       ['typescript'],
       ['react', { runtime: 'classic' }],
+      ['env', { modules: 'commonjs', targets: { esmodules: true } }],
     ],
     filename: 'app.tsx',
   }).code ?? '';
