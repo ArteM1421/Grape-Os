@@ -204,7 +204,7 @@ async function transpileComponent(code: string): Promise<string> {
   const Babel = (mod as unknown as { default?: typeof mod; transform?: (code: string, options?: Record<string, unknown>) => { code: string } }).default ?? (mod as unknown as { transform: (code: string, options?: Record<string, unknown>) => { code: string } });
   const transformed = Babel.transform(code, {
     presets: [
-      ['typescript', { allowDeclareFields: true }],
+      ['typescript'],
       ['react', { runtime: 'classic' }],
     ],
     filename: 'app.tsx',
