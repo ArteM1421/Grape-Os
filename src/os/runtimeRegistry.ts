@@ -190,7 +190,7 @@ let babelReady = false;
 
 async function ensureBabel(): Promise<void> {
   if (babelReady) return;
-  const Babel = (await import('@babel/standalone')).default;
+  await import('@babel/standalone');
   babelReady = true;
 }
 
@@ -200,7 +200,8 @@ async function transpileComponent(code: string): Promise<string> {
   const cached = transpileCache.get(code);
   if (cached) return cached;
 
-  const Babel = (await import('@babel/standalone')).default;
+  const mod = await import('@babel/standalone');
+  const Babel = (mod as unknown as { default?: typeof mod; transform?: (code: string, options?: Record<string, unknown>) => { code: string } }).default ?? (mod as unknown as { transform: (code: string, options?: Record<string, unknown>) => { code: string } });
   const transformed = Babel.transform(code, {
     presets: [
       ['typescript', { allowDeclareFields: true }],
