@@ -1,0 +1,2 @@
+[functions.vinhost]
+verify_jwt = false

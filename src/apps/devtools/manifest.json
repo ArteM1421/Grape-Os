@@ -1,0 +1,10 @@
+{
+  "id": "devtools",
+  "name": "Dev Tools",
+  "icon": "Code2",
+  "icons": {
+    "64": "./icons/icon-64.svg",
+    "32": "./icons/icon-32.svg",
+    "16": "./icons/icon-16.svg"
+  }
+}
